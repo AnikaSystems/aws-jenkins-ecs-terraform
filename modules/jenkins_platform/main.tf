@@ -146,6 +146,7 @@ resource "aws_lb_listener" http {
   port              = 80
   protocol          = "HTTP"
 
+/*
   default_action {
     type = "redirect"
 
@@ -163,13 +164,15 @@ resource "aws_lb_listener" https {
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2019-08"
   certificate_arn   = var.alb_acm_certificate_arn
+  */
 
-  default_action {
+    default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.this.arn
   }
 }
 
+/*
 resource "aws_lb_listener_rule" redirect_http_to_https {
   listener_arn = aws_lb_listener.http.arn
 
@@ -190,6 +193,7 @@ resource "aws_lb_listener_rule" redirect_http_to_https {
     }
   }
 }
+*/
 
 resource "aws_route53_record" this {
   count = var.route53_create_alias ? 1 : 0
